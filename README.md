@@ -29,7 +29,7 @@ your downloaded OVA.
 
 ## Role Variables
 
-Many of these variables are described in the [vic appliance installation guide](https://vmware.github.io/vic-product/assets/files/html/1.1/vic_vsphere_admin/deploy_vic_appliance.html).  
+Many of these variables are described in the [vic appliance installation guide](https://vmware.github.io/vic-product/assets/files/html/1.1/vic_vsphere_admin/deploy_vic_appliance.html).
 Go there for in depth descriptions of the variables
 
 
