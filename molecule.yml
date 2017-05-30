@@ -11,7 +11,7 @@ ansible:
   verbose: False
   playbook: "${MOLECULE_PLAYBOOK}"
   raw_env_vars:
-    ANSIBLE_ROLES_PATH: ../:../../
+    ANSIBLE_ROLES_PATH: .molecule/roles/govc
 driver:
   name: docker
 docker:
