@@ -4,20 +4,25 @@
 # defaults file for vic
 
 # specific version of VIC to install and run
-vic_version: "1.1.0"
+vic_version: "1.1.1-rc2"
 vic_tarball_name: vic_{{ vic_version }}.tar.gz
 
 # Where VIC files will be installed
 vic_install_path: /opt
 
-# generally shouldn't need to update this,
-# any VIC version found at this version ought to be usabe
-vic_download_url: "https://bintray.com/vmware/vic/download_file?file_path={{ vic_tarball_name }}"
+# If installing the OVA, should we verify the services are up
+# after running this role?
+vic_test_services_running: True
+vic_installed_ova: False
 
-vic_ova_path: /tmp/vic.ova
+# generally shouldn't need to update this,
+# any VIC version found at this location ought to be usable
+vic_download_url: "https://storage.googleapis.com/vic-engine-releases/{{ vic_tarball_name }}"
+#vic_download_url: "https://bintray.com/vmware/vic/download_file?file_path={{ vic_tarball_name }}"
 
 # Temporary storage for downloads
 vic_tmp: /tmp/vic
+vic_ova_path: "{{vic_tmp}}/vic.ova"
 
 # validate certs for the url we download vic from?
 vic_download_validate_certs: False

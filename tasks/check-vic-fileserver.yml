@@ -1,5 +1,4 @@
 ---
-
 # Check the file server url on the vic machine.
 # If the url is responsive, we'll avoid installing the ova
 # Also, output a couple notices if we're attempting to
@@ -14,6 +13,8 @@
     timeout: 5
   ignore_errors: yes
   register: ova_fileserver_output
+  become: no
+  delegate_to: localhost
 
 # if the vic server is hosting vic-machine, use the server
 # as the download url
@@ -21,7 +22,8 @@
   set_fact:
     vic_download_url: "{{ vic_fileserver_url }}/{{ vic_tarball_name }}"
   when: ova_fileserver_output | succeeded
-
+  become: no
+  delegate_to: localhost
 
 #- debug: var=ova_fileserver_output
 
@@ -31,6 +33,8 @@
       {{ vic_network_ip0 | default( vic_network_fqdn ) }}
       seems to be running a VIC fileserver.
   when: ova_fileserver_output | succeeded
+  become: no
+  delegate_to: localhost
 
 - name: Is VIC serving our version?
   debug:
@@ -38,3 +42,5 @@
       {{ vic_network_ip0 | default( vic_network_fqdn ) }}
       seems to be running the same version of VIC you are trying to install.
   when: vic_version in ova_fileserver_output.content
+  become: no
+  delegate_to: localhost

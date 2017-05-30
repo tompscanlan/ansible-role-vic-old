@@ -2,7 +2,6 @@
 # SPDX-License-Identifier: MIT
 ---
 
-
 - name: Include OS specific vars
   include_vars: "{{ ansible_system | lower }}.yml"
 

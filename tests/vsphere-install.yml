@@ -12,11 +12,10 @@
         - openssl
         - gawk
 
-    # https://storage.googleapis.com/vic-product-ova-dev-builds/vic-v1.1.1-rc2-1f1711a0.ova
-
   roles:
     - role: vic
   vars:
+    vic_ova_path: /Users/tscanlan/Downloads/vic-v1.1.1_56a309fb.ova
     password: some_password
     vic_network_fqdn: vic.home.local
     vic_network_searchpath: home.local

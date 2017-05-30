@@ -12,6 +12,13 @@
       state: directory
       recurse: yes
 
+  - name: Make temp directory
+    file:
+      dest: "{{ vic_tmp }}"
+      state: directory
+    become: no
+    delegate_to: localhost
+
   - debug: msg="Downloading vic engine from {{ vic_download_url }}"
   - name: Download vic-engine release archive to ansible host
     get_url:

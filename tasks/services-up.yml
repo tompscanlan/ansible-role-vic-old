@@ -1,19 +1,22 @@
 ---
 
-- name: Fileserver up?
-  wait_for:
-    timeout: 30
-    host: "{{ vic_network_ip0 | default( vic_network_fqdn ) }}"
-    port: "{{ vic_fileserver_port }}"
+- block:
+  - name: Fileserver up?
+    wait_for:
+      timeout: 30
+      host: "{{ vic_network_ip0 | default( vic_network_fqdn ) }}"
+      port: "{{ vic_fileserver_port }}"
 
-- name: Harbor Registry up?
-  wait_for:
-    timeout: 30
-    host: "{{ vic_network_ip0 | default( vic_network_fqdn ) }}"
-    port: "{{ vic_registry_port }}"
+  - name: Harbor Registry up?
+    wait_for:
+      timeout: 30
+      host: "{{ vic_network_ip0 | default( vic_network_fqdn ) }}"
+      port: "{{ vic_registry_port }}"
 
-- name: Admiral up?
-  wait_for:
-    timeout: 30
-    host: "{{ vic_network_ip0 | default( vic_network_fqdn ) }}"
-    port: "{{ vic_management_portal_port }}"
+  - name: Admiral up?
+    wait_for:
+      timeout: 30
+      host: "{{ vic_network_ip0 | default( vic_network_fqdn ) }}"
+      port: "{{ vic_management_portal_port }}"
+
+  when: vic_test_services_running and vic_installed_ova

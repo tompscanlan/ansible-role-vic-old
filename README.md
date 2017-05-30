@@ -4,19 +4,28 @@ Install and manage [vSphere Integrated Containers](https://github.com/vmware/vic
 
 VIC has 3 components:
 
-* [vic-engine](https://github.com/vmware/vic) support only runs on linux hosts, though the vic-machine binaries can support OSX and Windows
-* [harbor](https://github.com/vmware/harbor) not yet supported
-* [admiral](https://github.com/vmware/admiral) not yet supported
+* [vic-engine](https://github.com/vmware/vic) only supports linux hosts. vic-machine binaries can support OSX and Windows, but this role doesn't
+* [harbor](https://github.com/vmware/harbor) installed as part of the OVA deploy
+* [admiral](https://github.com/vmware/admiral) installed as part of the OVA deploy
+
+This role will install vic-engine so that you may manage VCHs manually.
+It also allows creation and removal of VCHs by using `vic_controller_hosts` and `vic_controller_hosts_delete`.
+
+If you supply a VIC ova, this role will install the OVA into vCenter, giving you
+[harbor](https://github.com/vmware/harbor) and [admiral](https://github.com/vmware/admiral).
+It will also install the vic-engine that is included in the OVA.
 
 ## Requirements:
 
-This rolle only runs on linux hosts, though the vic-machine binaries can support OSX and Windows
+This role only runs on linux hosts, though the vic-machine binaries can support OSX and Windows
 
 vic-engine requires the following installed:
 - openssl
 - awk, mawk, or gawk
 
-The vic OVA must already be local to the machine you are running the role against.
+The vic OVA must already be downloaded to the machine you are running ansible from.
+You can download it from https://www.vmware.com/go/download-vic.  Set `vic_ova_path` to the location of
+your downloaded OVA.
 
 ## Role Variables
 
@@ -58,7 +67,8 @@ If none are set, self-signed certs will be created.
 
 ### Defaults for these are reasonable, so probably no need to change:
 
-Specific version of VIC to install and run
+Specific version of vic-engine to download, install, and run. Set to `remove` to un install vic-engine.
+If using an OVA for installation, this version must match the OVA version.
 
     vic_version: "1.1.0"
 
@@ -75,6 +85,10 @@ To (dis)allow ssh into the VIC server as root
 
     vic_permit_root_login: False 
 
+Should we test that VIC services are up after installing the OVA?
+
+    vic_test_services_running: True
+
 ### Alternatives not tested... you probably shouldn't change them.
 
     vic_poweron: True
@@ -90,7 +104,6 @@ To change ports of the various components:
 Temporary storage for downloads
 
     vic_tmp: /tmp
-
 
 
 ### Change these to create/delete VIC Container Hosts
